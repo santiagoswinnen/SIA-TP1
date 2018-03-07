@@ -5,12 +5,12 @@
 # g: activation function
 # lr: learning rate. 
 
-function w = perceptronSimpleLearning (N,p,s,lr) # s requiere -1 como primer elemento (umbral)
+function w = perceptronSimpleLearning (N,p,s,lr) # p requiere -1 como primer elemento (umbral)
   changing = true;
-  w = rand(1,N)
+  w = rand(1,N+1);
   while(changing)
     changing = false;
-    for l = 1:length(p) #recorro l5os patrones
+    for l = 1:length(p) #recorro los patrones
       h = dot(p(l,:),w);
       if(h>0)
         o = 1;
@@ -20,7 +20,7 @@ function w = perceptronSimpleLearning (N,p,s,lr) # s requiere -1 como primer ele
       err = s(l) - o;
       if(err != 0)
         changing = true;
-        for i = 1:N
+        for i = 1:(N+1)
          e = p(l,i);
          delta = lr*err*e;
          w(i) += delta;
